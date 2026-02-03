@@ -1,0 +1,389 @@
+body {
+  width: 595px;
+  height: 842px;
+  margin: 0;
+  /* change the margins as you want them to be. */
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+.page {
+  position: relative;
+}
+.page .page-header {
+  margin-left: 3rem;
+  padding: 1.125rem 2.375rem 1.5rem 0;
+  border-bottom: 0.0625rem solid #004ad9;
+}
+.page .page-header.glossary {
+  padding: 1.4375rem 2.375rem 1.4375rem 0;
+  font-weight: bold;
+  font-size: 1.375rem;
+  line-height: 150%;
+  color: #004ad9;
+}
+.page .page-header .country-details {
+  display: inline-block;
+  margin-right: 1.125rem;
+}
+.page .page-header .arrow {
+  margin-right: 1.125rem;
+}
+.page .page-header .type-label {
+  font-size: 0.5rem;
+  color: #161616;
+  font-weight: 700;
+  line-height: 1rem;
+}
+.page .page-header .country-flag {
+  width: 1.75rem;
+  height: 1.125rem;
+}
+.page .page-header .country-name {
+  display: inline-block;
+  font-size: 1.125rem;
+  color: #0d1669;
+  margin-left: 0.325rem;
+  font-weight: 500;
+}
+.page .page-header .page-header-logo {
+  float: right;
+  height: 1rem;
+  width: auto;
+  margin-top: 1rem;
+}
+.page .index-value {
+  margin-left: 3rem;
+  height: 4.8125rem;
+  border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.1);
+}
+.page .index-value .item {
+  display: inline-block;
+  height: 4.8125rem;
+  width: 49.5%;
+  box-sizing: border-box;
+  padding: 0.5rem 2.375rem 1.125rem 0;
+}
+.page .index-value .item p {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #565656;
+  line-height: 150%;
+}
+.page .index-value h3 {
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: 150%;
+  color: #161616;
+}
+.page .index-value h3 span {
+  font-size: 0.875rem;
+  font-weight: normal;
+  margin-right: 0.3125rem;
+  color: #565656;
+}
+.page .index-value .item:first-child {
+  border-right: 0.0625rem solid rgba(0, 0, 0, 0.1);
+}
+.page .index-value .item:last-child {
+  text-align: right;
+}
+.page .page-content {
+  margin-left: 3rem;
+  padding: 1.625rem 2.375rem 1.625rem 0;
+}
+.page .page-content .page-title {
+  font-weight: bold;
+  font-size: 1.125rem;
+  line-height: 150%;
+  color: #2c2c2c;
+  margin-bottom: 0.6875rem;
+}
+.page .page-content .page-title span {
+  color: rgba(89, 89, 89, 0.4);
+  margin-right: 0.375rem;
+}
+.page .page-content .page-description {
+  font-weight: 600;
+  font-size: 0.75rem;
+  line-height: 150%;
+  color: #565656;
+  margin-bottom: 1.875rem;
+}
+.page sup {
+  font-size: 0.5rem;
+  font-weight: bold;
+}
+.page::after {
+  content: "";
+  width: 6px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, #004ad9 0%, #004ad9 33%, #56c1ef 33%, #56c1ef 100%);
+}
+.cover-page {
+  background-image: url("../assets/cover-background.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
+}
+.cover-page .title-section {
+  padding: 1.25rem 8% 0;
+}
+.cover-page .cover-logo {
+  margin-bottom: 6rem;
+}
+.cover-page .cover-title {
+  font-weight: bold;
+  font-size: 3rem;
+  line-height: 106.5%;
+  color: #ffffff;
+  position: relative;
+  margin-bottom: 6.38rem;
+  width: 80%;
+}
+.cover-page .underline {
+  position: relative;
+  white-space: nowrap;
+  color: #f4b206;
+}
+.cover-page .underline-image {
+  position: absolute;
+  left: 0;
+  bottom: -0.9375rem;
+}
+.cover-page .countries-info {
+  background: #ffffff;
+  padding-left: 6rem;
+}
+.cover-page .country-details {
+  padding: 2.19rem 0;
+  height: 160px;
+  max-height: 160px;
+  box-sizing: border-box;
+}
+.cover-page .country-details:first-child {
+  border-bottom: 0.0625rem solid #b6b9d2;
+  position: relative;
+}
+.cover-page .country-details:first-child .arrow {
+  position: absolute;
+  left: -2.25rem;
+  bottom: -1.125rem;
+}
+.cover-page .type-label {
+  font-size: 0.875rem;
+  color: #161616;
+  font-weight: 700;
+  margin-bottom: 0.6875rem;
+}
+.cover-page .country-flag {
+  width: 3.6875rem;
+  height: 2.4375rem;
+}
+.cover-page .country-name {
+  display: inline-block;
+  font-size: 2.625rem;
+  color: #0d1669;
+  margin-left: 1rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.cover-page .url-section {
+  padding: 1.25rem 8%;
+}
+.cover-page .url-section .world-icon {
+  margin-right: 1rem;
+}
+.cover-page .url-section p {
+  display: inline-block;
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.25rem;
+  color: #ffffff;
+  vertical-align: top;
+}
+.opportunity-page table {
+  display: table;
+  border-collapse: separate;
+  border-spacing: 0.75rem;
+  border-color: gray;
+  width: 100%;
+  margin: -0.75rem;
+}
+.opportunity-page td {
+  border: 0.0625rem solid rgba(130, 127, 152, 0.3);
+  padding: 0.625rem;
+  width: 50%;
+}
+.opportunity-page td p {
+  font-size: 0.625rem;
+  color: #565656;
+}
+.opportunity-page td p sup {
+  font-size: 0.5rem;
+  font-weight: bold;
+}
+.opportunity-page td h3 {
+  color: #565656;
+  font-size: 1rem;
+}
+.commodities-page table {
+  display: table;
+  border-collapse: collapse;
+  width: 100%;
+  border: 0.0625rem solid rgba(38, 38, 38, 0.1);
+}
+.commodities-page th {
+  border-bottom: 0.0625rem solid rgba(38, 38, 38, 0.1);
+  padding: 1.0625rem 1.25rem;
+  text-align: left;
+  color: #161616;
+  font-size: 0.75rem;
+}
+.commodities-page td {
+  border-bottom: 0.0625rem solid rgba(38, 38, 38, 0.1);
+  padding: 1.0625rem 1.25rem;
+  font-size: 0.75rem;
+  color: #2a2a2a;
+}
+.commodities-page td:nth-child(1) {
+  width: 10%;
+}
+.commodities-page td:nth-child(2) {
+  width: 55%;
+}
+.commodities-page td:nth-child(3) {
+  width: 35%;
+}
+.commodities-page .table-no {
+  margin-top: 0.5rem;
+  font-size: 0.5rem;
+  line-height: 150%;
+  color: #2a2a2a;
+  text-align: right;
+}
+.interconnected-page .countries-no {
+  border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.1);
+  margin-right: -2.375rem;
+  margin-bottom: 2.0625rem;
+  padding-bottom: 0.375rem;
+  font-size: 0.75rem;
+  line-height: 150%;
+  color: #565656;
+}
+.interconnected-page .country-card {
+  background: #ffffff;
+  border: 0.0625rem solid #efefef;
+  width: 12.1875rem;
+  display: inline-block;
+  margin-right: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+.interconnected-page .country-card .card-top {
+  padding: 0.625rem;
+  border-bottom: 0.0625rem solid #efefef;
+}
+.interconnected-page .country-card .card-top .flag {
+  width: 1.25rem;
+  height: 0.875rem;
+  margin-right: 0.425rem;
+}
+.interconnected-page .country-card .card-top h4 {
+  font-weight: 600;
+  font-size: 0.625rem;
+  line-height: 150%;
+  color: #161616;
+  margin-right: auto;
+  display: inline;
+  vertical-align: top;
+}
+.interconnected-page .country-card .value-div {
+  border: 0.0625rem solid #efefef;
+  padding: 0.625rem;
+}
+.interconnected-page .country-card .value-div p {
+  font-weight: 300;
+  font-size: 0.625rem;
+  line-height: 150%;
+  color: #595959;
+}
+.interconnected-page .country-card .value-div h3 {
+  font-weight: bold;
+  font-size: 0.875rem;
+  line-height: 150%;
+  color: #595959;
+}
+.interconnected-page .country-card .top-imports {
+  padding: 0.625rem;
+}
+.interconnected-page .country-card .top-imports p {
+  font-weight: 300;
+  font-size: 0.625rem;
+  line-height: 150%;
+  color: #595959;
+  margin-bottom: 0.625rem;
+}
+.interconnected-page .country-card .top-imports .imports .import {
+  display: inline-block;
+  height: 1.5rem;
+  border: 0.0625rem solid #e0e0e0;
+  border-radius: 1.5rem;
+  padding: 0 0.875rem;
+  margin-right: 0.375rem;
+  margin-bottom: 0.5rem;
+}
+.interconnected-page .country-card .top-imports .imports .import p {
+  display: inline;
+  font-size: 0.5rem;
+  line-height: 1.5rem;
+  vertical-align: bottom;
+  color: #595959;
+}
+.glossary-page .row-item {
+  margin-bottom: 2.25rem;
+}
+.glossary-page .row-item p {
+  display: inline-block;
+  vertical-align: text-top;
+  font-size: 0.875rem;
+  line-height: 130%;
+}
+.glossary-page .row-item p.no {
+  margin-right: 0.5rem;
+  font-weight: bold;
+  color: #595959;
+}
+.glossary-page .row-item p.key {
+  margin-right: 1.875rem;
+  font-weight: bold;
+  color: #595959;
+}
+.glossary-page .row-item p.description {
+  width: 60%;
+  float: right;
+  color: #565656;
+}
+.glossary-page .row-item::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.back-page {
+  background-color: blue;
+  background-image: url("../assets/back-background.png");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

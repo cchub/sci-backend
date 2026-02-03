@@ -1,0 +1,55 @@
+{
+  "app": {
+    "app_name": "app",
+    "token": "token"
+  },
+  "redis": {
+    "client": "",
+    "host": "127.0.0.1",
+    "port": "6379",
+    "url": "",
+    "string_numbers": null,
+    "socket_keepalive": true,
+    "enable_offline_queue": true,
+    "retry_unfulfilled_commands": false,
+    "password": "",
+    "db": 0,
+    "family": "",
+    "tls": "",
+    "prefix": ""
+  },
+  "joiOptions": {
+    "abortEarly": false,
+    "stripUnknown": true
+  },
+  "db": {
+    "connection": {
+      "url": "",
+      "user": "",
+      "pass": "",
+      "name": "sci",
+      "port": "27017",
+      "host": "localhost",
+      "auth": false
+    },
+    "config": {     
+      "useNewUrlParser": true,
+      "autoIndex": false,
+      "autoCreate": false,
+      "serverSelectionTimeoutMS": 0
+    }
+  },
+  "mail": {
+    "client": {
+      "host": "",
+      "port": "",
+      "auth": {
+        "user": "",
+        "pass": ""
+      }
+    },
+    "setup": {
+      "from": ""
+    }
+  }
+}

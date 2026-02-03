@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Cover page!</title>
+  <link rel="stylesheet" href="<%= backend %>/styles/style.css">
+  <link rel="stylesheet" href="<%= backend %>/styles/main.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <section class="opportunity-page page">
+    <div class="page-header">
+      <div class="country-details">
+        <h5 class="type-label">Exporting Country</h5>
+        <div class="country-name-flag">
+          <img src="https://lipis.github.io/flag-icon-css/flags/4x3/<%= export_code %>.svg" alt="" class="country-flag">
+          <h2 class="country-name"><%= exporter %></h2>
+        </div>
+      </div>
+      <img src="<%= backend %>/assets/circle-arrow-right.svg" alt="" class="arrow">
+      <div class="country-details">
+        <h5 class="type-label">Importing Country</h5>
+        <div class="country-name-flag">
+          <img src="https://lipis.github.io/flag-icon-css/flags/4x3/<%= import_code %>.svg" alt="" class="country-flag">
+          <h2 class="country-name"><%= importer %></h2>
+        </div>
+      </div>
+      <img src="<%= backend %>/assets/sci-logo-dark.svg" alt="" class="page-header-logo">
+    </div>
+    <div class="index-value">
+      <div class="item">
+        <p>Opportunity Index <sup>1</sup></p>
+        <h3><span>OPI</span><%= opi %>%</h3>
+      </div>
+      <div class="item">
+        <p><sup>2</sup> Current Trading Value (<%= year %>)</p>
+        <h3>$<%= trade_value %></h3>
+      </div>
+    </div>
+    <div class="page-content">
+      <h4 class="page-title"><span>01</span>Opportunity Statement</h4>
+      <p class="page-description">
+        There is a <b><%= opi %>%</b> chance of potential trade opportunities between 
+        exporting country (<%= exporter %>) and importing country (<%= importer %>). 
+        In addition to this, the two countries have the following characteristics 
+        that significantly influence the predicted trade volumes:
+      </p>
+      <table>
+        <tr>
+          <td>
+            <p>Social connectedness index <sup>3</sup></p>
+            <h3><%= sci %></h3>
+          </td>
+          <td>
+            <p>Distance between the two countries</p>
+            <h3><%= dist %> </h3>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Exporting country GDP</p>
+            <h3><%= exporter_gdp %> USD (<%= year %>)</h3>
+          </td>
+          <td>
+            <p>Importing country GDP</p>
+            <h3><%= importer_gdp %> USD (<%= year %>)</h3>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Exporting country region</p>
+            <h3><%= exporter_region %></h3>
+          </td>
+          <td>
+            <p>Importing country region</p>
+            <h3><%= importer_region %></h3>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Exporting country exchange rate</p>
+            <h3><%= exporter_foreign_exchange %> USD</h3>
+          </td>
+          <td>
+            <p>Importing country exchange rate</p>
+            <h3><%= importer_foreign_exchange %> USD</h3>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Sharing a common official language</p>
+            <h3><%= com_lang %></h3>
+          </td>
+          <td>
+            <p>Sharing a common border</p>
+            <h3><%= com_border %></h3>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Exporting Country Trade Blocks</p>
+            <h3><%= exporter_trade_blocks %></h3>
+          </td>
+          <td>
+            <p>Importing Country Trade Blocks</p>
+            <h3><%= importer_trade_blocks %></h3>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Exporting country competitiveness <sup>4</sup></p>
+            <h3><%= country_index %>%</h3>
+          </td>
+          <td>
+            <p>Exporting country competitiveness <sup>4</sup></p>
+            <h3><%= importing_country_index %>%</h3>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </section>
+</body>
+
+</html>

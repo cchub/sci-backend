@@ -1,0 +1,54 @@
+{
+  "app": {
+    "app_name": "APP_NAME"
+  },
+  "url": "https://api.scitrade.africa",
+  "cors": {
+    "origin": [
+      "https://www.scitrade.africa","https://scitrade.africa"
+    ],
+    "methods": [
+      "GET",
+      "PUT",
+      "POST",
+      "DELETE"
+    ],
+    "allowedHeader": "Content-Type,Authorization",
+    "exposedHeaders": ""
+  },
+  "redis": {
+    "client": "REDIS_CLIENT",
+    "host": "REDIS_HOST",
+    "port": "REDIS_GUEST_PORT",
+    "password": "REDIS_PASSWORD",
+    "url": "REDIS_URL",
+    "prefix": "REDIS_PREFIX"
+  },
+  "google-drive": {
+    "rootFolder": "ROOT_FOLDER_ID",
+    "driveFile": "FILE_NAME"
+  },
+  "db": {
+    "connection": {
+      "user": "MONGODB_APP_USER",
+      "pass": "MONGODB_APP_PASSWORD",
+      "name": "MONGODB_INIT_DATABASE",
+      "port": "MONGODB_GUEST_PORT",
+      "host": "MONGODB_HOST",
+      "auth": "MONGODB_AUTH"
+    }
+  },
+  "mail": {
+    "client": {
+      "host": "MAIL_HOST",
+      "port": "MAIL_PORT",
+      "auth": {
+        "user": "MAIL_AUTH_USER",
+        "pass": "MAIL_AUTH_PASSWORD"
+      }
+    },
+    "setup": {
+      "from": "MAIL_FROM"
+    }
+  }
+}

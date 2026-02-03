@@ -1,0 +1,77 @@
+# docker-compose.yml
+version: "3.7"
+
+networks:
+  webnet:
+
+services:
+  app:
+    restart: unless-stopped
+    build:
+      context: ./
+      args:
+        - PORT=${PORT}
+        - NODE_ENV=${NODE_ENV}
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - PORT=${PORT}
+      - BACKEND_URL=${BACKEND_URL}
+      ## Redis
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_PORT=${REDIS_GUEST_PORT}
+      ## Queue
+      - QUEUE_HOST=${REDIS_HOST}
+      - QUEUE_PASSWORD=${REDIS_PASSWORD}
+      - QUEUE_PORT=${REDIS_GUEST_PORT}
+    tty: true
+    networks:
+      - webnet
+    depends_on:
+      - mongodb
+      - redis
+    command: npm run start:${NODE_ENV}
+    ports:
+      - 0.0.0.0:${PORT}:${PORT}
+  mongodb:
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGODB_ROOT_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_ROOT_PASSWORD}
+      - MONGO_INITDB_DATABASE=${MONGODB_INIT_DATABASE}
+      - MONGO_INITDB_USERNAME=${MONGODB_APP_USER}
+      - MONGO_INITDB_PASSWORD=${MONGODB_APP_PASSWORD}
+    build:
+      context: ./mongodb
+      args:
+        - PORT=${MONGODB_GUEST_PORT}
+    ports:
+      - ${MONGODB_HOST_PORT}:${MONGODB_GUEST_PORT}
+    volumes:
+      - ./mongodb/docker-entrypoint-initdb.d/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
+      - ${DATA_PATH}/mongo/db:/data/db:rw
+      - ${DATA_PATH}/mongo/configdb:/data/configdb:rw
+      - ${LOG_PATH}/mongo/:/var/log/mongodb:rw
+    networks:
+      - webnet
+  ## Caching
+  redis:
+    build:
+      context: ./redis
+    restart: unless-stopped
+    ports:
+      - ${REDIS_HOST_PORT}:${REDIS_GUEST_PORT}
+    volumes:
+      - ${DATA_PATH}/redis:/data
+    networks:
+      - webnet
+    command:
+      [
+        "redis-server",
+        "/usr/local/etc/redis/redis.conf",
+        "--requirepass",
+        "${REDIS_PASSWORD}",
+      ]

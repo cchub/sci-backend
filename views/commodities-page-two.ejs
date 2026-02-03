@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Cover page!</title>
+  <link rel="stylesheet" href="<%= backend %>/styles/style.css">
+  <link rel="stylesheet" href="<%= backend %>/styles/main.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <section class="commodities-page page">
+    <div class="page-header">
+      <div class="country-details">
+        <h5 class="type-label">Exporting Country</h5>
+        <div class="country-name-flag">
+          <img src="https://lipis.github.io/flag-icon-css/flags/4x3/<%= export_code %>.svg" alt="" class="country-flag">
+          <h2 class="country-name"><%= exporter %></h2>
+        </div>
+      </div>
+      <img src="<%= backend %>/assets/circle-arrow-right.svg" alt="" class="arrow">
+      <div class="country-details">
+        <h5 class="type-label">Importing Country</h5>
+        <div class="country-name-flag">
+          <img src="https://lipis.github.io/flag-icon-css/flags/4x3/<%= import_code %>.svg" alt="" class="country-flag">
+          <h2 class="country-name"><%= importer %></h2>
+        </div>
+      </div>
+      <img src="<%= backend %>/assets/sci-logo-dark.svg" alt="" class="page-header-logo">
+    </div>
+    <div class="index-value">
+      <div class="item">
+        <p>Opportunity Index <sup>1</sup></p>
+        <h3><span>OPI</span><%= opi %>%</h3>
+      </div>
+      <div class="item">
+        <p><sup>2</sup> Current Trading Value (2018)</p>
+        <h3>$<%= trade_value %></h3>
+      </div>
+    </div>
+    <div class="page-content">
+      <h4 class="page-title"><span>02</span>Top 20 Potential Commodities <sup>5</sup></h4>
+      <table>
+        <tr>
+          <th>S/N</th>
+          <th>Commodity</th>
+          <th>Current Trading Value</th>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td><%= commodity1 %></td>
+            <td><%= export_value1 %></td>
+        </tr>
+        <tr>
+            <td>12</td>
+            <td><%= commodity2 %></td>
+            <td><%= export_value2 %></td>
+        </tr>
+        <tr>
+            <td>13</td>
+            <td><%= commodity3 %></td>
+            <td><%= export_value3 %></td>
+        </tr>
+        <tr>
+            <td>14</td>
+            <td><%= commodity4 %></td>
+            <td><%= export_value4 %></td>
+        </tr>
+        <tr>
+            <td>15</td>
+            <td><%= commodity5 %></td>
+            <td><%= export_value5 %></td>
+        </tr>
+        <tr>
+            <td>16</td>
+            <td><%= commodity6 %></td>
+            <td><%= export_value6 %></td>
+        </tr>
+        <tr>
+            <td>17</td>
+            <td><%= commodity7 %></td>
+            <td><%= export_value7 %></td>
+        </tr>
+        <tr>
+            <td>18</td>
+            <td><%= commodity8 %></td>
+            <td><%= export_value8 %></td>
+        </tr>
+        <tr>
+            <td>19</td>
+            <td><%= commodity9 %></td>
+            <td><%= export_value9 %></td>
+        </tr>
+        <tr>
+            <td>20</td>
+            <td><%= commodity10 %></td>
+            <td><%= export_value10 %></td>
+        </tr>
+      </table>
+      <p class="table-no">Table 2 of 2</p>
+    </div>
+  </section>
+</body>
+
+</html>

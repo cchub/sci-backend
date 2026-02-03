@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Cover page!</title>
+  <link rel="stylesheet" type="text/css" href="<%= backend %>/styles/style.css">
+  <link rel="stylesheet" type="text/css" href="<%= backend %>/styles/main.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <section class="cover-page">
+    <div class="title-section"><img class="cover-logo" src="<%= backend %>/assets/sci-logo-light.svg" alt="">
+      <h3 class="cover-title">
+        Discover&nbsp;new<br/>
+        trade&nbsp;networks <br/>
+        and&nbsp;opportunities <br/>
+        <span class="underline">within Africa.
+          <img class="underline-image" src="<%= backend %>/assets/underline.svg" alt="">
+        </span>
+      </h3>
+    </div>
+    <div class="countries-info">
+      <div class="country-details">
+        <h5 class="type-label">Exporting Country</h5>
+        <div class="country-name-flag">
+          <img src="https://lipis.github.io/flag-icon-css/flags/4x3/<%= export_code %>.svg" alt="" class="country-flag">
+          <h2 class="country-name"><%= exporter %></h2>
+        </div>
+        <img src="<%= backend %>/assets/circle-arrow-down.svg" alt="" class="arrow">
+      </div>
+      <div class="country-details">
+        <h5 class="type-label">Importing Country</h5>
+        <div class="country-name-flag">
+          <img src="https://lipis.github.io/flag-icon-css/flags/4x3/<%= import_code %>.svg" alt="" class="country-flag">
+          <h2 class="country-name"><%= importer %></h2>
+        </div>
+      </div>
+    </div>
+    <div class="url-section">
+      <img src="<%= backend %>/assets/world-icon.svg" alt="" class="world-icon">
+      <p>www.scitrade.africa</p>
+    </div>
+  </section>
+</body>
+
+</html>

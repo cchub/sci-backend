@@ -1,0 +1,10 @@
+{
+  "exclude": [
+    "index.js",
+    "*.spec.js",
+    "*node_modules",
+    "config/**/*.js",
+    "commitlint.config.js"
+  ],
+  "check-coverage": false
+}
