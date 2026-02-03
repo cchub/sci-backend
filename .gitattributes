@@ -1,1 +1,2 @@
+*.extension filter=lfs diff=lfs merge=lfs -text
 app/modules/storage/comprehensive_dataset_wide.json filter=lfs diff=lfs merge=lfs -text
