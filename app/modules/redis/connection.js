@@ -11,7 +11,7 @@ const _redisConfig = JSON.parse(JSON.stringify(config.get("redis")));
 
 // Sanitize redis configuration
 for (let i in _redisConfig) {
-  if (i === _redisConfig[i]) {
+  if (!_redisConfig[i] && _redisConfig[i] !== 0) {
     delete _redisConfig[i];
   }
 }

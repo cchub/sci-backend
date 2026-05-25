@@ -32,31 +32,34 @@ services:
       - webnet
     depends_on:
       - mongodb
+      - postgres
       - redis
     command: npm run start:${NODE_ENV}
     ports:
       - 0.0.0.0:${PORT}:${PORT}
-  mongodb:
+  postgres:
+    image: postgres:16
     restart: unless-stopped
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=${MONGODB_ROOT_USER}
-      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_ROOT_PASSWORD}
-      - MONGO_INITDB_DATABASE=${MONGODB_INIT_DATABASE}
-      - MONGO_INITDB_USERNAME=${MONGODB_APP_USER}
-      - MONGO_INITDB_PASSWORD=${MONGODB_APP_PASSWORD}
-    build:
-      context: ./mongodb
-      args:
-        - PORT=${MONGODB_GUEST_PORT}
-    ports:
-      - ${MONGODB_HOST_PORT}:${MONGODB_GUEST_PORT}
+      - POSTGRES_USER=${MONGODB_APP_USER}
+      - POSTGRES_PASSWORD=${MONGODB_APP_PASSWORD}
+      - POSTGRES_DB=${MONGODB_INIT_DATABASE}
     volumes:
-      - ./mongodb/docker-entrypoint-initdb.d/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
-      - ${DATA_PATH}/mongo/db:/data/db:rw
-      - ${DATA_PATH}/mongo/configdb:/data/configdb:rw
-      - ${LOG_PATH}/mongo/:/var/log/mongodb:rw
+      - postgres_data:/var/lib/postgresql/data
     networks:
       - webnet
+
+  mongodb:
+    image: ghcr.io/ferretdb/ferretdb:latest
+    restart: unless-stopped
+    environment:
+      - FERRETDB_POSTGRESQL_URL=postgres://${MONGODB_APP_USER}:${MONGODB_APP_PASSWORD}@postgres:5432/${MONGODB_INIT_DATABASE}
+    ports:
+      - ${MONGODB_HOST_PORT}:27017
+    networks:
+      - webnet
+    depends_on:
+      - postgres
   ## Caching
   redis:
     build:
@@ -75,3 +78,6 @@ services:
         "--requirepass",
         "${REDIS_PASSWORD}",
       ]
+
+volumes:
+  postgres_data:

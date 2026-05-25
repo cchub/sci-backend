@@ -18,14 +18,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/cchub/sci-analysis-test.git"
+    "url": "git+https://github.com/cchub/sci-backend.git "
   },
   "author": "Gasasira Kelly",
   "license": "ISC",
   "bugs": {
-    "url": "https://gitlab.com/cchub/sci-analysis-test/issues"
+    "url": "https://github.com/cchub/sci-backend/issues"
   },
-  "homepage": "https://gitlab.com/cchub/sci-analysis-test#readme",
+  "homepage": "https://github.com/cchub/sci-backend#readme",
   "dependencies": {
     "@hapi/joi": "17.1.1",
     "@hapi/joi-date": "2.0.1",

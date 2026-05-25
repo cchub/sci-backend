@@ -6,7 +6,12 @@ const CommoditySet = function () {
   const script = resolve(
     resolve(__dirname, "..", "modules/storage/Section Level Data.json")
   );
-  const jsoned = JSON.parse(JSON.stringify(require(script)));
+  let jsoned;
+  try {
+    jsoned = JSON.parse(JSON.stringify(require(script)));
+  } catch (_) {
+    return [];
+  }
   let result = [];
   for (let com of jsoned) {
     const obj = {};

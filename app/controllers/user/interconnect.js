@@ -27,6 +27,9 @@ module.exports = class {
         { _id: 0, interconnected_countries: 1 }
       );
 
+      if (!interconnected || !interconnected.interconnected_countries)
+        return res.json([]);
+
       const finale = await Trade.aggregate([
         {
           $match: {

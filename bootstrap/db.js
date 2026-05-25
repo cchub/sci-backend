@@ -29,13 +29,8 @@ exports = module.exports = async () => {
   //   }
   // }
 
-  let auth = "";
-
-  if (~[true, "true", 1, "1"].indexOf(conn.auth)) {
-    auth = `${encodeURIComponent(conn.user)}:${encodeURIComponent(conn.pass)}@`;
-  }
-
-  const mongouri = `mongodb://${auth}${conn.host}:${conn.port}/${conn.name}`;
+  const mongouri = `mongodb://${conn.user}:${conn.pass}@${conn.host}:${conn.port}/${conn.name}?authSource=admin`;
+  console.log(mongouri);
 
   mongoose
     .connect(mongouri, dbConfig)

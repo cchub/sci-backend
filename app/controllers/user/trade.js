@@ -607,6 +607,8 @@ module.exports = class {
 
       // look for all countries importing that specific commodity
       const com = await Commodity.findOne({ commodity });
+      if (!com)
+        return res.status(NOT_FOUND).json({ message: "commodity not found" });
       // const importers = await Trade.aggregate([
       //   { $unwind: { path: "$commodity_tradeValue" } },
       //   { $match: { "commodity_tradeValue.commodity": com._id } },
@@ -725,57 +727,38 @@ module.exports = class {
         },
       ]);
 
-      const com = (
-        await Trade.aggregate([
-          {
-            $match: {
-              Exporting_country: exporter,
-              Importing_country: importer,
-            },
-          },
-          {
-            $addFields: {
-              index: {
-                $indexOfArray: ["$commodities", commodity],
-              },
-            },
-          },
-          {
-            $project: {
-              _id: 0,
-              index: 1,
-              commodity: { $arrayElemAt: ["$commodities", "$index"] },
-              commodity_index: { $arrayElemAt: ["$commodity_index", "$index"] },
-              export_value: { $arrayElemAt: ["$export_value", "$index"] },
-              commodity_code: { $arrayElemAt: ["$commodity_code", "$index"] },
-              top_exporters: {
-                $split: [{ $arrayElemAt: ["$top_exporters", "$index"] }, "/"],
-              },
-              top_importers: {
-                $split: [{ $arrayElemAt: ["$top_importers", "$index"] }, "/"],
-              },
-              demand: { $arrayElemAt: ["$demand", "$index"] },
-              supply: { $arrayElemAt: ["$supply", "$index"] },
-              supplyoverdemand: {
-                $arrayElemAt: ["$supplyoverdemand", "$index"],
-              },
-              tradeoverdemand: { $arrayElemAt: ["$tradeoverdemand", "$index"] },
-              exporters_opi: {
-                $split: [{ $arrayElemAt: ["$exporters_opi", "$index"] }, "/"],
-              },
-              importers_opi: {
-                $split: [{ $arrayElemAt: ["$importers_opi", "$index"] }, "/"],
-              },
-              exported_value: {
-                $split: [{ $arrayElemAt: ["$exported_value", "$index"] }, "/"],
-              },
-              imported_value: {
-                $split: [{ $arrayElemAt: ["$imported_value", "$index"] }, "/"],
-              },
-            },
-          },
-        ])
-      )[0];
+      const tradeDoc = await Trade.findOne(
+        { Exporting_country: exporter, Importing_country: importer },
+        {
+          commodities: 1, commodity_index: 1, export_value: 1, commodity_code: 1,
+          top_exporters: 1, top_importers: 1, demand: 1, supply: 1,
+          supplyoverdemand: 1, tradeoverdemand: 1, exporters_opi: 1,
+          importers_opi: 1, exported_value: 1, imported_value: 1,
+        }
+      );
+      if (!tradeDoc)
+        return res.status(NOT_FOUND).json({ message: "trade not found" });
+      const index = tradeDoc.commodities.findIndex(
+        (c) => c.toLowerCase() === commodity.toLowerCase()
+      );
+      if (index === -1)
+        return res.status(NOT_FOUND).json({ message: "commodity not found in trade" });
+      const com = {
+        commodity: tradeDoc.commodities[index],
+        commodity_index: tradeDoc.commodity_index[index],
+        export_value: tradeDoc.export_value[index],
+        commodity_code: tradeDoc.commodity_code[index],
+        top_exporters: (tradeDoc.top_exporters[index] || "").split("/"),
+        top_importers: (tradeDoc.top_importers[index] || "").split("/"),
+        demand: tradeDoc.demand[index],
+        supply: tradeDoc.supply[index],
+        supplyoverdemand: tradeDoc.supplyoverdemand[index],
+        tradeoverdemand: tradeDoc.tradeoverdemand[index],
+        exporters_opi: (tradeDoc.exporters_opi[index] || "").split("/"),
+        importers_opi: (tradeDoc.importers_opi[index] || "").split("/"),
+        exported_value: (tradeDoc.exported_value[index] || "").split("/"),
+        imported_value: (tradeDoc.imported_value[index] || "").split("/"),
+      };
 
       const commodity_tradeValue = {
         commodity: com.commodity,
