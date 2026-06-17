@@ -19,3 +19,4 @@ obj/
 .env*
 app/modules/storage/reports/SCI*
 drive.json
+.claude/*
