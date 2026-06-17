@@ -1,0 +1,1 @@
+- [DPG compliance — FerretDB & seeding](project_dpg_compliance.md) — FerretDB replaces MongoDB; data seeded from local JSON files; no Google APIs required to run
