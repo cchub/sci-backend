@@ -2,100 +2,81 @@
 
 ## Description
 
-The Social Interconnectedness Index (SCI) platform analyzes trade relationships and opportunities among African countries. The system processes economic data from Google Sheets and generates comprehensive trade reports with PDF outputs.
+The Social Interconnectedness Index (SCI) platform analyses trade relationships and opportunities among African countries. It exposes a REST API for querying trade data, commodity breakdowns, country indices, and opportunity indices across 53 African nations.
 
 ## Tech Stack
 
 ### Backend
 - **Node.js** (v15.x) with Express.js framework
-- **MongoDB** for data persistence
-- **Redis** for caching and job queuing
-- **Bull** for background job processing
+- **FerretDB** — MongoDB-compatible layer (open-source, Apache 2.0)
+- **PostgreSQL 16** — underlying storage for FerretDB
+- **Mongoose** — ODM; connects to FerretDB over the standard MongoDB wire protocol
+- **Redis** — caching and job queuing
+- **Bull** — background job processing
 
-### Data Sources & Integration
-- **Google Sheets API** - Primary data source for trade and economic data
-- **Google Drive API** - File storage and synchronization
-- **Exchange Rates API** - Real-time currency conversion
+> FerretDB replaces MongoDB as the datastore. It speaks the MongoDB wire protocol, so Mongoose and all aggregation pipelines work without modification. No MongoDB licence (SSPL) is required.
+
+### Data
+The trade dataset is shipped as static JSON files inside the repository under `app/modules/storage/`. A seed script populates the database from these files — no external API credentials are needed to run the platform.
+
+| File | Contents |
+|---|---|
+| `comprehensive_dataset_wide.json` | Main trade dataset (53 countries × bilateral pairs) |
+| `All Commodities, SCI & OppIndex.json` | Commodity list with SCI and Opportunity Index values |
+| `Official exchange rate(2019).json` | Fixed exchange rates used as fallback |
+| `online_foreign_exchange.json` | Cached live exchange rates |
 
 ### Document Generation
-- **PDF Generation** - HTML-PDF, PDFKit, Hummus for report creation
-- **EJS Templates** - Dynamic report templating
-- **Email Templates** - Automated report distribution
+- **PDF Generation** — HTML-PDF, PDFKit, Hummus
+- **EJS Templates** — dynamic report templating
+- **Email Templates** — automated report distribution
 
 ### Infrastructure
-- **Docker & Docker Compose** - Containerized deployment
-- **PM2** - Process management
-- **Winston** - Logging system
-- **Swagger** - API documentation
-
-## Data Flow & Google Sheets Integration
-
-### Primary Data Sources
-1. **Main Spreadsheet**: `1JwRPkg_c1lEXnyysb4x_hJEdRtla9EnerEn4NQBRQ9c`
-   - Contains report metadata and configuration
-   - Processed via `Report_info` sheet
-
-2. **Google Drive Files**:
-   - `comprehensive_dataset_wide.json` - Main trade dataset
-   - `Section Level Data.json` - Sectoral analysis data
-   - `Official exchange rate(2019).json` - Currency data
-
-### Data Processing Pipeline
-1. **Automated Sync**: Background workers fetch data from Google Sheets/Drive
-2. **Data Transformation**: Raw data is processed and categorized
-3. **Report Generation**: Dynamic PDF reports created using templates
-4. **Caching**: Processed data cached in Redis for performance
-
-### Key Features
-- Real-time data synchronization from Google Sheets
-- Automated foreign exchange rate updates
-- Multi-country trade analysis (Kenya, Nigeria, Rwanda)
-- PDF report generation with country-specific branding
-- Email distribution system for reports
+- **Docker & Docker Compose** — fully containerised; one command to start everything
+- **PM2** — process management
+- **Winston** — structured logging
+- **Swagger** — API documentation at `/api/docs`
 
 ## Quick Start
 
 ### Prerequisites
 - Docker and Docker Compose
-- Google Service Account credentials
 
 ### Setup
 
-1. **Environment Configuration**
+1. **Environment configuration**
    ```bash
    cp .env.example .env
-   # Request credentials from kelly@cchub.africa
+   # Edit .env and fill in the values (see Environment Variables below)
    ```
 
-2. **Google Service Account**
-   - Place your `drive.json` credentials file in the root directory
-   - Ensure the service account has access to the required Google Sheets and Drive folders
-
-3. **Start Services**
+2. **Start all services and seed the database**
    ```bash
    docker-compose up -d --build
    ```
+   The `seed` service runs automatically on first start. It reads from the local JSON files and populates FerretDB (via PostgreSQL). No external API calls are made.
 
-4. **View Logs**
+3. **View logs**
    ```bash
    docker-compose logs -f app
+   docker-compose logs -f seed   # see seed progress
    ```
+
+### Seeding manually (outside Docker)
+
+```bash
+node scripts/seed.js
+```
+
+The script reads the `MONGODB_URI` environment variable, or falls back to `mongodb://root:root@localhost:27017/sci?authSource=admin`.
 
 ### API Endpoints
 - **Base URL**: `http://localhost:8282/api`
-- **Documentation**: `http://localhost:8282/api-docs`
+- **Documentation**: `http://localhost:8282/api/docs`
 - **Health Check**: `http://localhost:8282/api/health`
-
-### Background Jobs
-The system runs automated jobs for:
-- Daily foreign exchange rate updates
-- Google Sheets data synchronization
-- Report generation and distribution
-- Data validation and cleanup
 
 ## Development
 
-### Local Development
 ```bash
 npm install
 npm run start:development
@@ -106,17 +87,44 @@ npm run start:development
 npm test
 ```
 
-### Environment Variables
-Key configuration variables:
-- `SCI_ID` - Google Sheets document ID
-- `ROOT_FOLDER_ID` - Google Drive root folder
-- `MONGODB_CONNECTION_URI` - Database connection
-- `REDIS_HOST` - Cache server configuration
+All 22 functional tests run against FerretDB. No MongoDB instance is required.
+
+## Environment Variables
+
+| Variable | Description |
+|---|---|
+| `PORT` | Application port (default `8282`) |
+| `NODE_ENV` | `development` or `production` |
+| `MONGODB_HOST` | FerretDB host (default `localhost`) |
+| `MONGODB_GUEST_PORT` | FerretDB port (default `27017`) |
+| `MONGODB_INIT_DATABASE` | Database name (default `sci`) |
+| `MONGODB_APP_USER` | Database user |
+| `MONGODB_APP_PASSWORD` | Database password |
+| `REDIS_HOST` | Redis host |
+| `REDIS_PASSWORD` | Redis password |
 
 ## Architecture
 
 ```
-Google Sheets/Drive → API Layer → Data Processing → MongoDB/Redis → Report Generation → PDF Output
+Local JSON files
+      │
+      ▼
+ scripts/seed.js
+      │
+      ▼
+ FerretDB (MongoDB wire protocol)
+      │
+      ▼
+ PostgreSQL 16  ◄──  persisted data
+      │
+      ▼
+ Express API  ──►  REST endpoints
 ```
 
-The platform maintains a serverless-first approach with minimal database dependencies, leveraging Google Sheets as the primary data source for maximum flexibility and real-time updates.
+## Platform Independence
+
+This project meets the [DPG platform independence requirement](https://github.com/DPGAlliance/dpg-resources/tree/main/docs/platform-independence):
+
+- **Database**: FerretDB (Apache 2.0) + PostgreSQL 16 (PostgreSQL Licence) — both OSI-approved. No proprietary MongoDB dependency.
+- **Data**: shipped as static files in the repository. No Google Sheets or Google Drive credentials are required to run or seed the platform.
+- **All aggregation operators** used in the codebase (`$lookup`, `$unwind`, `$addFields`, `$group`, `$project`, `$sort`, `$match`, `$expr`, `$slice`, `$push`, `$sum`) are supported by FerretDB and verified by the test suite.

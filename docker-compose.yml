@@ -34,9 +34,32 @@ services:
       - mongodb
       - postgres
       - redis
+      - seed
     command: npm run start:${NODE_ENV}
     ports:
       - 0.0.0.0:${PORT}:${PORT}
+
+  # One-shot service: seeds the database from local JSON files on first start.
+  # Uses the same image as the app so no extra build is needed.
+  seed:
+    build:
+      context: ./
+      args:
+        - PORT=${PORT}
+        - NODE_ENV=${NODE_ENV}
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - MONGODB_URI=mongodb://${MONGODB_APP_USER}:${MONGODB_APP_PASSWORD}@mongodb:27017/${MONGODB_INIT_DATABASE}?authSource=admin
+    networks:
+      - webnet
+    depends_on:
+      - mongodb
+    restart: "no"
+    command: node scripts/seed.js
+
   postgres:
     image: postgres:16
     restart: unless-stopped
@@ -49,6 +72,8 @@ services:
     networks:
       - webnet
 
+  # FerretDB provides a MongoDB-compatible wire protocol backed by PostgreSQL.
+  # No MongoDB licence required — this is the open-source datastore for the project.
   mongodb:
     image: ghcr.io/ferretdb/ferretdb:latest
     restart: unless-stopped
@@ -60,6 +85,7 @@ services:
       - webnet
     depends_on:
       - postgres
+
   ## Caching
   redis:
     build:
