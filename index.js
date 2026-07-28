@@ -42,13 +42,7 @@ const app = express();
 const port = process.env.PORT || 8282;
 
 // Boot up application.
-try {
-  // app.use(helmet)
-  boot(app);
-} catch (e) {
-  console.log(e);
-  logger.error(e);
-}
+boot(app);
 
 // // cron job
 // worker();

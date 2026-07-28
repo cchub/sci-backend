@@ -4,9 +4,7 @@ const request = require("request");
 // const cc = require("currency-codes");
 const fs = require("fs");
 const { resolve } = require("path");
-const NodeGoogleDrive = require("node-google-drive");
 const logger = require("../../../bootstrap/logger");
-const FileUpdate = require("./drive_update");
 const Data = require("../storage/Official exchange rate(2019).json");
 const _ = require("lodash");
 const Currency = require("./currencies");
@@ -92,7 +90,7 @@ const Foreign = async () => {
       }
     });
   } catch (e) {
-    await require("../drive.js")();
+    logger.error("Foreign exchange fetch failed", e);
   }
 };
 

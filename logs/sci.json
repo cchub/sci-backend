@@ -1,0 +1,19 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 30
+    },
+    "auditLog": "logs/sci.json",
+    "files": [
+        {
+            "date": 1785265793657,
+            "name": "logs/app-log-2026-07-28.log",
+            "hash": "05ffba60a686a93048233699665f0162"
+        },
+        {
+            "date": 1785265793658,
+            "name": "logs/app-exception-2026-07-28.log",
+            "hash": "b7fde06ea28ec000d18906b46652d0f2"
+        }
+    ]
+}

@@ -1,0 +1,16 @@
+{"@timestamp":"2026-07-28T19:09:54.276Z","@fields":{"code":"ERR_DLOPEN_FAILED","level":"error"}}
+{"@message":"App started on 8282","@timestamp":"2026-07-28T19:09:54.285Z","@fields":{"level":"info"}}
+{"@message":"DB Connected on port: 27017...","@timestamp":"2026-07-28T19:09:54.356Z","@fields":{"level":"info"}}
+{"@timestamp":"2026-07-28T19:12:37.781Z","@fields":{"code":"ERR_DLOPEN_FAILED","level":"error"}}
+{"@message":"App started on 8282","@timestamp":"2026-07-28T19:12:37.788Z","@fields":{"level":"info"}}
+{"@message":"DB Connected on port: 27017...","@timestamp":"2026-07-28T19:12:37.833Z","@fields":{"level":"info"}}
+{"@timestamp":"2026-07-28T19:13:10.733Z","@fields":{"code":"ERR_DLOPEN_FAILED","level":"error"}}
+{"@message":"App started on 8282","@timestamp":"2026-07-28T19:13:10.740Z","@fields":{"level":"info"}}
+{"@message":"DB Connected on port: 27017...","@timestamp":"2026-07-28T19:13:10.776Z","@fields":{"level":"info"}}
+{"@message":"App started on 8282","@timestamp":"2026-07-28T19:18:32.310Z","@fields":{"level":"info"}}
+{"@message":"DB Connected on port: 27017...","@timestamp":"2026-07-28T19:18:32.353Z","@fields":{"level":"info"}}
+{"@message":"App started on 8282","@timestamp":"2026-07-28T19:24:44.664Z","@fields":{"level":"info"}}
+{"@message":"DB Connected on port: 27017...","@timestamp":"2026-07-28T19:24:44.704Z","@fields":{"level":"info"}}
+{"@message":"App started on 8282","@timestamp":"2026-07-28T19:25:21.791Z","@fields":{"level":"info"}}
+{"@message":"DB Connected on port: 27017...","@timestamp":"2026-07-28T19:25:21.829Z","@fields":{"level":"info"}}
+{"@message":"DB Connected on port: 27017...","@timestamp":"2026-07-28T19:26:21.273Z","@fields":{"level":"info"}}

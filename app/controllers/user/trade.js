@@ -29,7 +29,6 @@ module.exports = class {
   static getTrade() {
     return async (req, res) => {
       /**
-       * @dataset Interconnected module from spreadsheet.js
        * @desc User provides country of interest
        * @param focus_country
        * @final find country group in dataset and send data

@@ -24,7 +24,6 @@ const { resolve } = require("path");
 // );
 const pdf = require("html-pdf");
 const moment = require("moment");
-const HummusRecipe = require("hummus-recipe");
 const { Trade } = require("../../models/Trade");
 require("dotenv");
 const backend = process.env.BACKEND_URL;
@@ -635,6 +634,7 @@ module.exports = class {
                                                                           message:
                                                                             "Error creating pdf",
                                                                         });
+                                                                    const HummusRecipe = require("hummus-recipe");
                                                                     const pdfDoc =
                                                                       new HummusRecipe(
                                                                         script2,

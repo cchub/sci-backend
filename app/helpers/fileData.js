@@ -25,10 +25,7 @@ const FileData = async () => {
   try {
     jsoned = JSON.parse(dt);
   } catch (e) {
-    const Drive = require("../modules/drive");
-    await Drive();
-    const newDt = fs.readFileSync(script, "utf-8");
-    jsoned = JSON.parse(newDt);
+    throw new Error(`Failed to parse comprehensive_dataset_wide.json: ${e.message}`);
   }
 
   return jsoned;

@@ -11,10 +11,6 @@
     "url": "REDIS_URL",
     "prefix": "REDIS_PREFIX"
   },
-  "google-drive": {
-    "rootFolder": "ROOT_FOLDER_ID",
-    "driveFile": "FILE_NAME"
-  },
   "db": {
     "connection": {
       "url": "MONGODB_CONNECTION_URI",
